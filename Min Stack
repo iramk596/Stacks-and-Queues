@@ -1,1 +1,22 @@
-
+class Solution {
+    public boolean isValid(String s) {
+        if (s.length() % 2 != 0) return false; // odd length can't be valid
+        
+        Stack<Character> stack = new Stack<>();
+        
+        for (char ch : s.toCharArray()) {
+            // push expected closing bracket
+            if (ch == '(') stack.push(')');
+            else if (ch == '{') stack.push('}');
+            else if (ch == '[') stack.push(']');
+            else {
+                // check if stack is empty OR mismatch
+                if (stack.isEmpty() || stack.pop() != ch) {
+                    return false;
+                }
+            }
+        }
+        
+        return stack.isEmpty();
+    }
+}
